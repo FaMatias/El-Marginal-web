@@ -3,74 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Marginal: San Onofre Penitenciario</title>
+    <title>El Marginal: Un Viaje por San Onofre</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <img src="logo_el_marginal.png" alt="Logo El Marginal" class="main-logo">
-            <h1 id="site-title">El Marginal</h1>
-        </div>
-        <nav class="season-nav">
-            <button class="nav-btn active" data-season="s1">Temp. 1</button>
-            <button class="nav-btn" data-season="s2">Temp. 2</button>
-            <button class="nav-btn" data-season="s3">Temp. 3</button>
-            <button class="nav-btn" data-season="s4">Temp. 4</button>
-            <button class="nav-btn" data-season="s5">Temp. 5</button>
-            <button class="nav-btn" data-season="s6">El Mudo</button>
-        </nav>
-    </header>
-
-    <main>
-        <section id="content-display">
-            </section>
-
-        <section id="game-section">
-            <div class="game-container">
-                <h2 class="game-title">Juego: Combate en el Patio</h2>
-                <p class="game-subtitle">Elige a tu luchador y demuestra quién manda en San Onofre.</p>
-                
-                <div id="character-selection">
-                    <h3 class="selection-title">Selecciona tu Personaje:</h3>
-                    <div class="character-grid">
-                        </div>
-                </div>
-
-                <div id="character-profile" class="hidden">
-                    <div id="profile-image"></div>
-                    <div class="profile-info">
-                        <h4 id="profile-name"></h4>
-                        <p id="profile-bio"></p>
-                        <div class="stats-container">
-                            <p>Fuerza: <span id="profile-strength"></span></p>
-                            <p>Agilidad: <span id="profile-agility"></span></p>
-                            <p>Aguante: <span id="profile-stamina"></span></p>
-                        </div>
-                        <button id="select-fight-btn">¡Entrar al ring!</button>
-                    </div>
-                </div>
-
-                <div id="fight-area" class="hidden">
-                    <div class="fighter" id="player1">
-                        <div class="fighter-emoji" id="player1-emoji"></div>
-                        <div class="stats-bar health-bar-container"><div id="player1-health" class="health-bar"></div></div>
-                        <span class="fighter-name"></span>
-                    </div>
-                    <div class="fighter" id="player2">
-                        <div class="fighter-emoji" id="player2-emoji"></div>
-                        <div class="stats-bar health-bar-container"><div id="player2-health" class="health-bar"></div></div>
-                        <span class="fighter-name"></span>
-                    </div>
-                    <div id="combat-log"></div>
-                    <button id="start-fight-btn">¡Pelear!</button>
-                    <div id="fight-result" class="hidden"></div>
-                </div>
+    <main id="main-container">
+        <section class="story-section intro-section">
+            <h1 class="title">El Marginal</h1>
+            <h2 class="subtitle">El que se muere en la cárcel, se muere dos veces.</h2>
+            <div class="scroll-prompt">
+                <p>Desplaza para entrar...</p>
+                <div class="arrow-down"></div>
             </div>
         </section>
-    </main>
 
+        <section class="story-section s1-section">
+            <div class="content-box">
+                <h3 class="season-title">Temporada 1: Los Subterráneos</h3>
+                <p>Pastor, un ex-policía, se infiltra en San Onofre para rescatar a la hija de un juez. Sin saberlo, se adentra en un mundo de códigos y violencia donde los hermanos Borges controlan todo.</p>
+                <img src="s1_pastor_infiltration.jpg" alt="Pastor Infiltrado" class="story-image">
+            </div>
+        </section>
+
+        <section class="story-section s2-section">
+            <div class="content-box">
+                <h3 class="season-title">Temporada 2: El Origen</h3>
+                <p>La precuela nos lleva a la lucha de poder. Un joven Mario Borges se enfrenta al temido "Sapo" para convertirse en el nuevo rey de la prisión, forjando las alianzas que definieron la serie.</p>
+                <img src="s2_borges_sapo.jpg" alt="Lucha de Poder" class="story-image">
+            </div>
+        </section>
+
+        <section class="story-section s3-section">
+            <div class="content-box">
+                <h3 class="season-title">Temporada 3: Negocios de Mierda</h3>
+                <p>Con el poder en sus manos, los Borges se dedican a la corrupción. La llegada de un famoso boxeador y una figura política revelan la podrida red que se extiende más allá de los muros de la prisión.</p>
+                <img src="s3_boxeador.jpg" alt="Boxeador" class="story-image">
+            </div>
+        </section>
+        
+        <section class="story-section s4-section">
+            <div class="content-box">
+                <h3 class="season-title">Temporada 4: El Federal</h3>
+                <p>El penal es clausurado. Los reclusos son transferidos a un penal de máxima seguridad. Allí, los viejos enemigos Pastor y los Borges se ven obligados a formar una alianza para sobrevivir a una nueva jerarquía criminal.</p>
+                <img src="s4_pastor_borges_encuentro.jpg" alt="Alianza Imposible" class="story-image">
+            </div>
+        </section>
+
+        <section class="story-section s5-section">
+            <div class="content-box">
+                <h3 class="season-title">Temporada 5: La Redención</h3>
+                <p>El final de la saga. La verdad sale a la luz. Los secretos, las traiciones y los lazos de sangre se definen en una confrontación final que marcará el destino de todos los que han pisado San Onofre.</p>
+                <video src="s5_final_confrontation.mp4" autoplay loop muted class="story-video"></video>
+            </div>
+        </section>
+
+        <section class="story-section s6-section">
+            <div class="content-box">
+                <h3 class="season-title">El Mudo: La Cárcel de Mujeres</h3>
+                <p>Una nueva historia, un nuevo penal. El Mudo se centra en la cárcel de mujeres, donde Bardo, una reclusa aguerrida, debe luchar contra un sistema corrupto y líderes despiadadas. Pastor Peña regresa, esta vez con un objetivo distinto, atado a un pasado que lo persigue.</p>
+                <img src="s6_bardo.jpg" alt="El Mudo" class="story-image">
+            </div>
+        </section>
+
+        <section class="story-section outro-section">
+            <h2 class="outro-text">"La cárcel te rompe la cabeza, te rompe el alma."</h2>
+        </section>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
