@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Marginal: El Sitio Oficial de San Onofre</title>
+    <title>El Marginal: San Onofre Penitenciario</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <button class="nav-btn" data-season="s3">Temp. 3</button>
             <button class="nav-btn" data-season="s4">Temp. 4</button>
             <button class="nav-btn" data-season="s5">Temp. 5</button>
-            <button class="nav-btn" data-season="s6">En El Barro</button>
+            <button class="nav-btn" data-season="s6">El Mudo</button>
         </nav>
     </header>
 
@@ -30,7 +30,7 @@
         <section id="game-section">
             <div class="game-container">
                 <h2 class="game-title">Juego: Combate en el Patio</h2>
-                <p class="game-subtitle">Elige a tu luchador y demuestra quién manda en el patio de San Onofre.</p>
+                <p class="game-subtitle">Elige a tu luchador y demuestra quién manda en San Onofre.</p>
                 
                 <div id="character-selection">
                     <h3 class="selection-title">Selecciona tu Personaje:</h3>
@@ -39,7 +39,7 @@
                 </div>
 
                 <div id="character-profile" class="hidden">
-                    <img id="profile-image" src="" alt="Perfil del personaje">
+                    <div id="profile-image"></div>
                     <div class="profile-info">
                         <h4 id="profile-name"></h4>
                         <p id="profile-bio"></p>
@@ -54,13 +54,13 @@
 
                 <div id="fight-area" class="hidden">
                     <div class="fighter" id="player1">
-                        <img id="player1-img" src="" alt="Personaje 1">
-                        <div class="stats-bar health-bar" id="player1-health"></div>
+                        <div class="fighter-emoji" id="player1-emoji"></div>
+                        <div class="stats-bar health-bar-container"><div id="player1-health" class="health-bar"></div></div>
                         <span class="fighter-name"></span>
                     </div>
                     <div class="fighter" id="player2">
-                        <img id="player2-img" src="" alt="Personaje 2">
-                        <div class="stats-bar health-bar" id="player2-health"></div>
+                        <div class="fighter-emoji" id="player2-emoji"></div>
+                        <div class="stats-bar health-bar-container"><div id="player2-health" class="health-bar"></div></div>
                         <span class="fighter-name"></span>
                     </div>
                     <div id="combat-log"></div>
