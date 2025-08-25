@@ -43,28 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
             characters: [
                 { name: 'Mario Borges', alias: 'Mario', image: 's5_mario.jpg' },
                 { name: 'Diosito Borges', alias: 'Diosito', image: 's5_diosito.jpg' },
-                { name: 'Barro', alias: 'Barro', image: 's5_barro.jpg' }
+                { name: 'Coco', alias: 'Coco', image: 's5_coco.jpg' }
             ]
         },
         s6: {
-            title: 'En El Barro (El Mudo): La Cárcel de Mujeres',
+            title: 'El Mudo (En El Barro): La Cárcel de Mujeres',
             description: 'En este spin-off, la historia se centra en una cárcel de mujeres donde las internas viven bajo las mismas reglas de poder y corrupción que los hombres en San Onofre. Con una estética similar, esta serie explora el otro lado del sistema penitenciario.',
             characters: [
-                { name: 'Tati', alias: 'Tati', image: 's6_tati.jpg' },
-                { name: 'Coco', alias: 'Coco', image: 's6_coco.jpg' },
-                { name: 'Rita', alias: 'Rita', image: 's6_rita.jpg' }
+                { name: 'Bardo', alias: 'Bardo', image: 's6_bardo.jpg', bio: 'El personaje principal de la serie. Es una mujer aguerrida y con una historia de vida muy compleja, que la hace fuerte e impredecible. La vida en la cárcel de mujeres la obliga a pelear por su propia superviviencia.'},
+                { name: 'Gato', alias: 'Gato', image: 's6_gato.jpg', bio: 'Un personaje temido en la cárcel de mujeres. Siempre está vigilando y actúa de forma silenciosa para obtener lo que quiere. Nadie sabe realmente de su pasado, pero es conocida por su fuerza.'},
+                { name: 'Chuky', alias: 'Chuky', image: 's6_chuky.jpg', bio: 'Una de las líderes de la prisión de mujeres. Su forma de ser es dura, pero leal a quienes la siguen. No duda en usar la violencia para mantener el orden en el patio.'},
+                { name: 'Pastor Peña', alias: 'Pastor', image: 's6_pastor.jpg', bio: 'En esta serie, Pastor Peña reaparece con otro objetivo. Su pasado lo obliga a enfrentarse a los nuevos desafíos que le depara la vida, esta vez en la cárcel de mujeres. Se le ve como una figura más sabia, que ayuda a otros a sobrevivir en este ambiente.'}
             ]
         }
     };
 
     const charactersForGame = {
-        'pastor': { name: 'Pastor Peña', strength: 8, agility: 7, stamina: 9, image: 'game_pastor.png', bio: 'Un ex-policía que se infiltró en San Onofre. Es astuto y un buen estratega. Su fuerza está en su aguante y su mente fría.' },
-        'mario': { name: 'Mario Borges', strength: 9, agility: 6, stamina: 8, image: 'game_mario.png', bio: 'El líder y la mente maestra. Físicamente fuerte y sin escrúpulos. Su poder reside en su astucia y brutalidad.' },
-        'diosito': { name: 'Diosito Borges', strength: 7, agility: 9, stamina: 7, image: 'game_diosito.png', bio: 'Impulsivo y rápido. La mano derecha de Mario, su agilidad lo hace un oponente impredecible y letal en el cuerpo a cuerpo.' },
-        'sapo': { name: 'El Sapo', strength: 10, agility: 5, stamina: 10, image: 'game_sapo.png', bio: 'La bestia de la prisión. Es la fuerza pura y el poder bruto. Su poca agilidad se compensa con una fuerza y aguante inigualables.' },
-        'coco': { name: 'Coco', strength: 7, agility: 8, stamina: 6, image: 'game_coco.png', bio: 'Un personaje clave en la prisión. No destaca por su fuerza pero es rápido y sabe esquivar bien los problemas. Un rival a tomar en serio.' },
-        'tati': { name: 'Tati', strength: 6, agility: 8, stamina: 7, image: 'game_tati.png', bio: 'Líder en la prisión de mujeres. Inteligente y ágil, no duda en usar cualquier ventaja para ganar. Una oponente digna de respeto.' },
-        'barro': { name: 'Barro', strength: 9, agility: 6, stamina: 8, image: 'game_barro.png', bio: 'Un recluso temido. Su fuerza y aguante lo convierten en un tanque humano. Ataca con golpes certeros y no se rinde fácilmente.' }
+        'pastor': { name: 'Pastor Peña', strength: 8, agility: 7, stamina: 9, emoji: '🎨', bio: 'Un ex-policía con experiencia. Su fuerza está en su aguante y su mente fría.' },
+        'mario': { name: 'Mario Borges', strength: 9, agility: 6, stamina: 8, emoji: '👑', bio: 'El líder y la mente maestra. Físicamente fuerte y sin escrúpulos.' },
+        'diosito': { name: 'Diosito Borges', strength: 7, agility: 9, stamina: 7, emoji: '👼', bio: 'Impulsivo y rápido. Su agilidad lo hace un oponente impredecible.' },
+        'sapo': { name: 'El Sapo', strength: 10, agility: 5, stamina: 10, emoji: '🐸', bio: 'La bestia de la prisión. Es la fuerza pura y el poder bruto.' },
+        'coco': { name: 'Coco', strength: 7, agility: 8, stamina: 6, emoji: '⛓️', bio: 'Un personaje clave. No destaca por su fuerza pero es rápido y sabe esquivar bien.' },
+        'tati': { name: 'Tati', strength: 6, agility: 8, stamina: 7, emoji: '💅', bio: 'Líder en la prisión de mujeres. Inteligente y ágil, no duda en usar cualquier ventaja para ganar.' },
+        'bardo': { name: 'Bardo', strength: 9, agility: 6, stamina: 8, emoji: '💥', bio: 'Un personaje aguerrido y fuerte. No se rinde fácilmente.' },
+        'gato': { name: 'Gato', strength: 8, agility: 7, stamina: 6, emoji: '🐱', bio: 'Un personaje silencioso, pero fuerte. Es un oponente digno en la pelea.'},
+        'chuky': { name: 'Chuky', strength: 8, agility: 8, stamina: 7, emoji: '🔪', bio: 'Una líder astuta y veloz. Sabe cómo pelear y se defiende como nadie.'}
     };
     
     // VARIABLES DEL JUEGO
@@ -73,24 +76,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const MAX_HEALTH = 100;
 
     // --- LÓGICA DE NAVEGACIÓN Y CONTENIDO ---
-
     const navButtons = document.querySelectorAll('.nav-btn');
     const contentDisplay = document.getElementById('content-display');
 
     function renderContent(season) {
         const data = seasonData[season];
         const html = `
-            <h3>${data.title}</h3>
-            <p>${data.description}</p>
-            <h4>Personajes Principales</h4>
-            <div class="characters-list">
-                ${data.characters.map(char => `
-                    <div class="character-card">
-                        <img src="${char.image}" alt="${char.name}">
-                        <h5>${char.name}</h5>
-                        <p>Apodo: ${char.alias}</p>
-                    </div>
-                `).join('')}
+            <div class="season-content-box">
+                <h3 class="season-title">${data.title}</h3>
+                <p class="season-description">${data.description}</p>
+                <h4 class="characters-title">Personajes Principales</h4>
+                <div class="characters-list">
+                    ${data.characters.map(char => `
+                        <div class="character-card">
+                            <img src="${char.image}" alt="${char.name}">
+                            <h5>${char.name}</h5>
+                            <p class="character-alias">Apodo: ${char.alias}</p>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
         `;
         contentDisplay.innerHTML = html;
@@ -105,11 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Carga el contenido de la primera temporada por defecto
     renderContent('s1');
 
     // --- LÓGICA DEL JUEGO SIMULADO ---
-
     const characterSelection = document.getElementById('character-selection');
     const characterGrid = characterSelection.querySelector('.character-grid');
     const characterProfile = document.getElementById('character-profile');
@@ -125,8 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
             charDiv.classList.add('character-card-game');
             charDiv.dataset.id = id;
             charDiv.innerHTML = `
-                <img src="${char.image}" alt="${char.name}">
-                <h5>${char.name}</h5>
+                <span class="game-emoji">${char.emoji}</span>
+                <h5 class="character-name-game">${char.name}</h5>
             `;
             characterGrid.appendChild(charDiv);
         }
@@ -134,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayProfile(id) {
         const char = charactersForGame[id];
-        document.getElementById('profile-image').src = char.image;
+        document.getElementById('profile-image').textContent = char.emoji;
         document.getElementById('profile-name').textContent = char.name;
         document.getElementById('profile-bio').textContent = char.bio;
         document.getElementById('profile-strength').textContent = char.strength;
@@ -142,34 +144,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('profile-stamina').textContent = char.stamina;
 
         characterProfile.classList.remove('hidden');
-        characterProfile.scrollIntoView({ behavior: 'smooth' });
+        characterSelection.classList.add('hidden');
         
-        // Asignar el ID al botón para la siguiente fase
         selectFightBtn.dataset.charId = id;
     }
 
     function setupFight(player1Id) {
-        // Selecciona un oponente al azar
         const opponents = Object.keys(charactersForGame).filter(key => key !== player1Id);
         const player2Id = opponents[Math.floor(Math.random() * opponents.length)];
 
         player1 = { ...charactersForGame[player1Id], health: MAX_HEALTH };
         player2 = { ...charactersForGame[player2Id], health: MAX_HEALTH };
         
-        document.getElementById('player1-img').src = player1.image;
-        document.getElementById('player2-img').src = player2.image;
+        document.getElementById('player1-emoji').textContent = player1.emoji;
+        document.getElementById('player2-emoji').textContent = player2.emoji;
         document.getElementById('player1').querySelector('.fighter-name').textContent = player1.name;
         document.getElementById('player2').querySelector('.fighter-name').textContent = player2.name;
 
-        // Mostrar el área de pelea y ocultar el perfil
         fightArea.classList.remove('hidden');
         characterProfile.classList.add('hidden');
         
-        // Animaciones de entrada
         document.getElementById('player1').classList.add('enter-from-left');
         document.getElementById('player2').classList.add('enter-from-right');
         
-        // Reiniciar barra de vida y log
         document.getElementById('player1-health').style.width = '100%';
         document.getElementById('player2-health').style.width = '100%';
         combatLog.innerHTML = '';
@@ -179,39 +176,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fightSimulation() {
-        if (player1.health <= 0 || player2.health <= 0) return;
+        if (player1.health <= 0 || player2.health <= 0) {
+            startFightBtn.disabled = true;
+            return;
+        }
 
-        // Lógica de daño
         const damage1 = Math.round(Math.random() * player1.strength) + 1;
         const damage2 = Math.round(Math.random() * player2.strength) + 1;
         
         player2.health -= damage1;
         player1.health -= damage2;
         
-        // Limitar la vida para que no baje de cero
         player1.health = Math.max(0, player1.health);
         player2.health = Math.max(0, player2.health);
+
+        document.getElementById('player1-emoji').classList.add('attack-animation');
+        document.getElementById('player2-emoji').classList.add('hit-animation');
         
-        // Animación de ataque y daño
-        document.getElementById('player1-img').classList.add('attack-animation');
-        document.getElementById('player2-img').classList.add('hit-animation');
-        
-        // Retrasar la eliminación de la clase para que se vea la animación
         setTimeout(() => {
-            document.getElementById('player1-img').classList.remove('attack-animation');
-            document.getElementById('player2-img').classList.remove('hit-animation');
+            document.getElementById('player1-emoji').classList.remove('attack-animation');
+            document.getElementById('player2-emoji').classList.remove('hit-animation');
         }, 500);
 
-        // Actualizar barras de vida
         document.getElementById('player1-health').style.width = `${player1.health}%`;
         document.getElementById('player2-health').style.width = `${player2.health}%`;
 
-        // Actualizar log
         combatLog.innerHTML += `<p>¡${player1.name} golpea a ${player2.name}! (${damage1} de daño)</p>`;
         combatLog.innerHTML += `<p>¡${player2.name} golpea a ${player1.name}! (${damage2} de daño)</p>`;
         combatLog.scrollTop = combatLog.scrollHeight;
         
-        // Comprobar si hay un ganador
         if (player1.health <= 0) {
             showResult(player2, player1);
         } else if (player2.health <= 0) {
@@ -221,11 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function showResult(winner, loser) {
         fightResult.classList.remove('hidden');
-        fightResult.innerHTML = `<h3>¡El ganador es ${winner.name}!</h3><p>${loser.name} fue derrotado en el patio.</p>`;
+        fightResult.innerHTML = `<h3 class="win-text">¡El ganador es ${winner.name}!</h3><p>${loser.name} fue derrotado.</p>`;
         startFightBtn.disabled = true;
     }
 
-    // Event Listeners
     characterGrid.addEventListener('click', (e) => {
         const charCard = e.target.closest('.character-card-game');
         if (charCard) {
@@ -241,6 +233,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startFightBtn.addEventListener('click', fightSimulation);
 
-    // Inicializar el juego
     renderCharacterGrid();
 });
