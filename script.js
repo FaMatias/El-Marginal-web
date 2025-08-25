@@ -58,17 +58,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const charactersForGame = {
-        'pastor': { name: 'Pastor Peña', strength: 8, agility: 7, stamina: 9, image: 'game_pastor.png' },
-        'mario': { name: 'Mario Borges', strength: 9, agility: 6, stamina: 8, image: 'game_mario.png' },
-        'diosito': { name: 'Diosito Borges', strength: 7, agility: 9, stamina: 7, image: 'game_diosito.png' },
-        'sapo': { name: 'El Sapo', strength: 10, agility: 5, stamina: 10, image: 'game_sapo.png' },
-        'coco': { name: 'Coco', strength: 7, agility: 8, stamina: 6, image: 'game_coco.png' },
-        'tati': { name: 'Tati', strength: 6, agility: 8, stamina: 7, image: 'game_tati.png' },
-        'barro': { name: 'Barro', strength: 9, agility: 6, stamina: 8, image: 'game_barro.png' }
+        'pastor': { name: 'Pastor Peña', strength: 8, agility: 7, stamina: 9, image: 'game_pastor.png', bio: 'Un ex-policía que se infiltró en San Onofre. Es astuto y un buen estratega. Su fuerza está en su aguante y su mente fría.' },
+        'mario': { name: 'Mario Borges', strength: 9, agility: 6, stamina: 8, image: 'game_mario.png', bio: 'El líder y la mente maestra. Físicamente fuerte y sin escrúpulos. Su poder reside en su astucia y brutalidad.' },
+        'diosito': { name: 'Diosito Borges', strength: 7, agility: 9, stamina: 7, image: 'game_diosito.png', bio: 'Impulsivo y rápido. La mano derecha de Mario, su agilidad lo hace un oponente impredecible y letal en el cuerpo a cuerpo.' },
+        'sapo': { name: 'El Sapo', strength: 10, agility: 5, stamina: 10, image: 'game_sapo.png', bio: 'La bestia de la prisión. Es la fuerza pura y el poder bruto. Su poca agilidad se compensa con una fuerza y aguante inigualables.' },
+        'coco': { name: 'Coco', strength: 7, agility: 8, stamina: 6, image: 'game_coco.png', bio: 'Un personaje clave en la prisión. No destaca por su fuerza pero es rápido y sabe esquivar bien los problemas. Un rival a tomar en serio.' },
+        'tati': { name: 'Tati', strength: 6, agility: 8, stamina: 7, image: 'game_tati.png', bio: 'Líder en la prisión de mujeres. Inteligente y ágil, no duda en usar cualquier ventaja para ganar. Una oponente digna de respeto.' },
+        'barro': { name: 'Barro', strength: 9, agility: 6, stamina: 8, image: 'game_barro.png', bio: 'Un recluso temido. Su fuerza y aguante lo convierten en un tanque humano. Ataca con golpes certeros y no se rinde fácilmente.' }
     };
     
     // VARIABLES DEL JUEGO
     let player1, player2;
+    let player1Health, player2Health;
+    const MAX_HEALTH = 100;
 
     // --- LÓGICA DE NAVEGACIÓN Y CONTENIDO ---
 
@@ -110,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const characterSelection = document.getElementById('character-selection');
     const characterGrid = characterSelection.querySelector('.character-grid');
+    const characterProfile = document.getElementById('character-profile');
+    const selectFightBtn = document.getElementById('select-fight-btn');
     const fightArea = document.getElementById('fight-area');
     const startFightBtn = document.getElementById('start-fight-btn');
     const combatLog = document.getElementById('combat-log');
@@ -128,84 +132,115 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function setupFight(player1Id, player2Id) {
-        player1 = charactersForGame[player1Id];
-        player2 = charactersForGame[player2Id];
+    function displayProfile(id) {
+        const char = charactersForGame[id];
+        document.getElementById('profile-image').src = char.image;
+        document.getElementById('profile-name').textContent = char.name;
+        document.getElementById('profile-bio').textContent = char.bio;
+        document.getElementById('profile-strength').textContent = char.strength;
+        document.getElementById('profile-agility').textContent = char.agility;
+        document.getElementById('profile-stamina').textContent = char.stamina;
 
+        characterProfile.classList.remove('hidden');
+        characterProfile.scrollIntoView({ behavior: 'smooth' });
+        
+        // Asignar el ID al botón para la siguiente fase
+        selectFightBtn.dataset.charId = id;
+    }
+
+    function setupFight(player1Id) {
+        // Selecciona un oponente al azar
+        const opponents = Object.keys(charactersForGame).filter(key => key !== player1Id);
+        const player2Id = opponents[Math.floor(Math.random() * opponents.length)];
+
+        player1 = { ...charactersForGame[player1Id], health: MAX_HEALTH };
+        player2 = { ...charactersForGame[player2Id], health: MAX_HEALTH };
+        
         document.getElementById('player1-img').src = player1.image;
         document.getElementById('player2-img').src = player2.image;
         document.getElementById('player1').querySelector('.fighter-name').textContent = player1.name;
         document.getElementById('player2').querySelector('.fighter-name').textContent = player2.name;
 
-        document.getElementById('fight-area').classList.remove('hidden');
-        document.getElementById('character-selection').classList.add('hidden');
+        // Mostrar el área de pelea y ocultar el perfil
+        fightArea.classList.remove('hidden');
+        characterProfile.classList.add('hidden');
         
         // Animaciones de entrada
         document.getElementById('player1').classList.add('enter-from-left');
         document.getElementById('player2').classList.add('enter-from-right');
-    }
-
-    function fightSimulation() {
-        startFightBtn.disabled = true;
+        
+        // Reiniciar barra de vida y log
+        document.getElementById('player1-health').style.width = '100%';
+        document.getElementById('player2-health').style.width = '100%';
         combatLog.innerHTML = '';
         fightResult.classList.add('hidden');
 
-        // Lógica simple de simulación de combate
-        const messages = [
-            `¡${player1.name} ataca con una patada!`,
-            `¡${player2.name} esquiva y contraataca!`,
-            `Un derechazo de ${player1.name} impacta en el rostro de ${player2.name}!`,
-            `${player2.name} responde con un rodillazo al estómago.`
-        ];
-        
-        const winner = (player1.strength + player1.stamina) > (player2.strength + player2.stamina) ? player1 : player2;
-        const loser = winner === player1 ? player2 : player1;
+        fightArea.scrollIntoView({ behavior: 'smooth' });
+    }
 
-        let logIndex = 0;
-        const fightInterval = setInterval(() => {
-            if (logIndex < messages.length) {
-                const p = document.createElement('p');
-                p.textContent = messages[logIndex];
-                combatLog.appendChild(p);
-                combatLog.scrollTop = combatLog.scrollHeight;
-                logIndex++;
-            } else {
-                clearInterval(fightInterval);
-                showResult(winner, loser);
-            }
-        }, 1000);
+    function fightSimulation() {
+        if (player1.health <= 0 || player2.health <= 0) return;
+
+        // Lógica de daño
+        const damage1 = Math.round(Math.random() * player1.strength) + 1;
+        const damage2 = Math.round(Math.random() * player2.strength) + 1;
+        
+        player2.health -= damage1;
+        player1.health -= damage2;
+        
+        // Limitar la vida para que no baje de cero
+        player1.health = Math.max(0, player1.health);
+        player2.health = Math.max(0, player2.health);
+        
+        // Animación de ataque y daño
+        document.getElementById('player1-img').classList.add('attack-animation');
+        document.getElementById('player2-img').classList.add('hit-animation');
+        
+        // Retrasar la eliminación de la clase para que se vea la animación
+        setTimeout(() => {
+            document.getElementById('player1-img').classList.remove('attack-animation');
+            document.getElementById('player2-img').classList.remove('hit-animation');
+        }, 500);
+
+        // Actualizar barras de vida
+        document.getElementById('player1-health').style.width = `${player1.health}%`;
+        document.getElementById('player2-health').style.width = `${player2.health}%`;
+
+        // Actualizar log
+        combatLog.innerHTML += `<p>¡${player1.name} golpea a ${player2.name}! (${damage1} de daño)</p>`;
+        combatLog.innerHTML += `<p>¡${player2.name} golpea a ${player1.name}! (${damage2} de daño)</p>`;
+        combatLog.scrollTop = combatLog.scrollHeight;
+        
+        // Comprobar si hay un ganador
+        if (player1.health <= 0) {
+            showResult(player2, player1);
+        } else if (player2.health <= 0) {
+            showResult(player1, player2);
+        }
     }
     
     function showResult(winner, loser) {
         fightResult.classList.remove('hidden');
         fightResult.innerHTML = `<h3>¡El ganador es ${winner.name}!</h3><p>${loser.name} fue derrotado en el patio.</p>`;
-        startFightBtn.disabled = false;
+        startFightBtn.disabled = true;
     }
 
-    // Event Listeners del juego
-    let player1Id = 'mario', player2Id = 'diosito'; // Valores por defecto
-
+    // Event Listeners
     characterGrid.addEventListener('click', (e) => {
         const charCard = e.target.closest('.character-card-game');
         if (charCard) {
-            const id = charCard.dataset.id;
-            // Un poco de IA para elegir al oponente
-            const opponents = Object.keys(charactersForGame).filter(key => key !== id);
-            const randomOpponentId = opponents[Math.floor(Math.random() * opponents.length)];
-            
-            player1Id = id;
-            player2Id = randomOpponentId;
-            
-            // Ocultar selección y mostrar área de pelea
-            setupFight(player1Id, player2Id);
-            
-            fightArea.scrollIntoView({ behavior: 'smooth' });
+            displayProfile(charCard.dataset.id);
         }
+    });
+
+    selectFightBtn.addEventListener('click', () => {
+        const charId = selectFightBtn.dataset.charId;
+        setupFight(charId);
+        startFightBtn.disabled = false;
     });
 
     startFightBtn.addEventListener('click', fightSimulation);
 
     // Inicializar el juego
     renderCharacterGrid();
-
 });
