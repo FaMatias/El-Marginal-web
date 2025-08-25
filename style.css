@@ -1,349 +1,146 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Bebas+Neue&display=swap');
 
 :root {
     --main-bg-color: #1a1a1a;
-    --secondary-bg-color: #2c2c2c;
-    --accent-color-red: #d12e2e;
-    --accent-color-orange: #ff4500;
     --text-color: #f0f0f0;
-    --border-color: #5d0202;
-    --shadow-color: #000;
+    --accent-color-red: #d12e2e;
+    --section-bg-color: rgba(0, 0, 0, 0.7);
 }
 
-body {
-    font-family: 'Roboto Condensed', sans-serif;
-    background-color: var(--main-bg-color);
-    color: var(--text-color);
+body, html {
     margin: 0;
-    background-image: url('prison_texture_concrete.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-blend-mode: multiply;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+#main-container {
     background-color: var(--main-bg-color);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transition: background-image 1s ease-in-out;
+    background-blend-mode: multiply;
+    background-color: #0d0d0d;
 }
 
-/* --- Estilos de cabecera y navegación --- */
-header {
-    text-align: center;
-    padding: 20px 0;
-    background: rgba(0, 0, 0, 0.8);
-    border-bottom: 2px solid var(--border-color);
-}
-
-.main-logo {
-    max-width: 250px;
-    filter: drop-shadow(0 0 5px var(--accent-color-red));
-}
-
-.season-nav {
+.story-section {
+    height: 100vh;
     display: flex;
     justify-content: center;
-    gap: 10px;
-    padding: 10px 0;
-}
-
-.nav-btn {
-    background-color: var(--secondary-bg-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    border-radius: 3px;
-    text-transform: uppercase;
-}
-
-.nav-btn:hover {
-    background-color: var(--border-color);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-}
-
-.nav-btn.active {
-    background-color: var(--accent-color-red);
-    border-color: var(--accent-color-orange);
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--accent-color-red);
-    animation: pulse-border 1.5s infinite;
-}
-
-@keyframes pulse-border {
-    0% { box-shadow: 0 0 10px var(--accent-color-red); }
-    50% { box-shadow: 0 0 3px var(--accent-color-red); }
-    100% { box-shadow: 0 0 10px var(--accent-color-red); }
-}
-
-main {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 2px solid var(--border-color);
+    align-items: center;
+    padding: 0 50px;
     position: relative;
+    box-sizing: border-box;
 }
 
-/* --- Contenido de las temporadas --- */
-
-#content-display {
-    padding-bottom: 30px;
+/* --- Títulos y textos iniciales --- */
+.title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: var(--accent-color-red);
+    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    letter-spacing: 5px;
+    animation: fadeIn 2s ease-in-out;
 }
 
-.season-content-box {
-    border: 2px solid var(--border-color);
-    padding: 20px;
-    background: var(--secondary-bg-color);
-    box-shadow: 0 0 10px var(--shadow-color) inset;
+.subtitle {
+    font-size: 2rem;
+    color: var(--text-color);
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+    animation: fadeIn 3s ease-in-out;
+}
+
+.scroll-prompt {
+    position: absolute;
+    bottom: 50px;
+    text-align: center;
+    animation: fadeAndMove 2s infinite ease-in-out;
+    opacity: 0;
+    animation-delay: 2.5s;
+    animation-fill-mode: forwards;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid var(--text-color);
+    margin: 10px auto;
+}
+
+/* --- Estilos de las cajas de contenido --- */
+.content-box {
+    background: var(--section-bg-color);
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--accent-color-red);
+    padding: 30px;
+    text-align: center;
+    max-width: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    transition: transform 1s ease, opacity 1s ease;
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+.content-box.visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .season-title {
-    color: var(--accent-color-red);
-    text-transform: uppercase;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.characters-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.character-card {
-    background: var(--main-bg-color);
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    width: 200px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.character-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--accent-color-red);
-}
-
-.character-card img {
-    width: 100%;
-    border: 2px solid var(--accent-color-red);
-    filter: brightness(0.8);
-    transition: filter 0.3s;
-}
-
-.character-card:hover img {
-    filter: brightness(1.1);
-}
-
-/* --- Estilos de la sección del juego --- */
-
-#game-section {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.game-title {
-    color: var(--accent-color-orange);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 2rem;
-    text-shadow: 2px 2px 0 var(--shadow-color);
-}
-
-.character-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    background: var(--secondary-bg-color);
-    border: 2px solid var(--border-color);
-}
-
-.character-card-game {
-    background: var(--main-bg-color);
-    border: 2px solid var(--secondary-bg-color);
-    padding: 10px;
-    cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.character-card-game:hover {
-    transform: scale(1.1);
-    border-color: var(--accent-color-red);
-    box-shadow: 0 0 10px var(--accent-color-red);
-}
-
-.game-emoji {
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 3rem;
-    line-height: 1;
-    text-shadow: 2px 2px 0 var(--shadow-color);
-}
-
-/* --- Estilos del perfil del personaje --- */
-
-#character-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    background: var(--secondary-bg-color);
-    border: 2px solid var(--border-color);
-    margin-top: 20px;
-}
-
-#profile-image {
-    font-size: 8rem;
-    text-shadow: 4px 4px 0 var(--shadow-color);
-}
-
-.profile-info {
-    text-align: center;
-}
-
-.stats-container p {
-    margin: 5px 0;
     color: var(--accent-color-red);
-}
-
-#select-fight-btn {
-    background: var(--accent-color-red);
-    color: var(--text-color);
-    border: 2px solid var(--accent-color-orange);
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 15px;
     text-transform: uppercase;
+    margin: 0 0 15px;
 }
 
-/* --- Estilos de la zona de combate --- */
-
-#fight-area {
-    position: relative;
-    height: 400px;
-    background-image: url('prison_yard_ring.jpg');
-    background-size: cover;
-    background-position: center;
-    border: 5px solid var(--accent-color-red);
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.story-image, .story-video {
+    max-width: 100%;
     margin-top: 20px;
-    box-shadow: 0 0 20px var(--shadow-color);
-}
-
-.fighter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    bottom: 20px;
-    transition: transform 0.5s;
-}
-
-.fighter-emoji {
-    font-size: 6rem;
-    text-shadow: 4px 4px 0 var(--shadow-color);
-    transition: transform 0.5s;
-}
-
-.fighter-name {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1rem;
-    text-shadow: 1px 1px 0 var(--shadow-color);
-}
-
-.health-bar-container {
-    width: 150px;
-    height: 20px;
-    background-color: var(--secondary-bg-color);
-    border: 2px solid var(--border-color);
-    border-radius: 3px;
-    overflow: hidden;
-    box-shadow: inset 0 0 5px var(--shadow-color);
-}
-
-.health-bar {
-    background-color: var(--accent-color-red);
-    height: 100%;
-    transition: width 0.5s ease-in-out;
-}
-
-#player1 { left: 10%; }
-#player2 { right: 10%; }
-
-/* --- Animaciones de combate --- */
-.attack-animation { animation: attack 0.5s forwards; }
-.hit-animation { animation: hit 0.5s forwards; }
-
-@keyframes attack {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(50px) scale(1.1); }
-    100% { transform: translateX(0); }
-}
-
-@keyframes hit {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.9) translateX(-10px); }
-    100% { transform: scale(1); }
-}
-
-/* --- Logs y botones del juego --- */
-#combat-log {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-height: 100px;
-    overflow-y: auto;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-}
-
-#start-fight-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--accent-color-red);
-    color: var(--text-color);
-    border: 2px solid var(--accent-color-orange);
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-transform: uppercase;
-}
-
-#fight-result {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.9);
     border: 3px solid var(--accent-color-red);
-    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    filter: saturate(1.2) contrast(1.1);
+}
+
+.story-video {
+    width: 100%;
+}
+
+/* --- Estilos de la sección final --- */
+.outro-section {
+    background: #000;
+    flex-direction: column;
+}
+
+.outro-text {
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--accent-color-red);
     text-align: center;
-    font-family: 'Press Start 2P', cursive;
+    animation: fadeIn 3s ease-in-out;
+    filter: blur(5px);
+    animation: revealText 4s forwards;
 }
 
-.win-text {
-    color: var(--accent-color-orange);
+@keyframes revealText {
+    from { opacity: 0; filter: blur(5px); }
+    to { opacity: 1; filter: blur(0); }
 }
 
-/* --- Utilidad --- */
-.hidden { display: none; }
+/* --- Animaciones globales --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeAndMove {
+    0% { opacity: 0; transform: translateY(-20px); }
+    50% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
