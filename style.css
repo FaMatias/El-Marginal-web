@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    background-image: url('prison_texture.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+    background-color: #212121;
+}
+
+/* --- ESTILOS GENERALES Y LAYOUT --- */
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border-bottom: 2px solid #5d0202;
+}
+
+.main-logo {
+    max-width: 250px;
+    filter: drop-shadow(0 0 5px #ff0000);
+}
+
+.season-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.nav-btn {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background-color: #d12e2e;
+    border-color: #ff0000;
+    transform: scale(1.1);
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid #5d0202;
+}
+
+section {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* --- ESTILOS DEL CONTENIDO DE LAS TEMPORADAS --- */
+
+#content-display h3 {
+    color: #ff0000;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.characters-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.character-card {
+    background: #222;
+    border: 1px solid #555;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.character-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #d12e2e;
+}
+
+.character-card img {
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid #ff0000;
+}
+
+/* --- ESTILOS DEL JUEGO SIMULADO --- */
+
+#game-section {
+    text-align: center;
+}
+
+.game-title {
+    color: #ff0000;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.game-subtitle {
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background: rgba(30, 30, 30, 0.8);
+    border: 2px solid #5d0202;
+}
+
+.character-card-game {
+    background: #1a1a1a;
+    border: 2px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.character-card-game:hover {
+    transform: scale(1.05);
+    border-color: #ff0000;
+}
+
+.character-card-game img {
+    width: 100%;
+    border-radius: 5px;
+    filter: grayscale(100%);
+    transition: filter 0.3s;
+}
+
+.character-card-game:hover img {
+    filter: grayscale(0%);
+}
+
+#fight-area {
+    position: relative;
+    height: 400px; /* Ajusta la altura según la imagen de fondo */
+    background-image: url('prison_yard_ring.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #d12e2e;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.fighter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+}
+
+.fighter img {
+    width: 150px; /* Tamaño del sprite del personaje */
+    height: auto;
+}
+
+.fighter-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.stats-bar {
+    width: 100px;
+    height: 10px;
+    background-color: #555;
+    border: 1px solid #000;
+}
+
+.health-bar {
+    background-color: #ff0000;
+    animation: pulse 1s infinite alternate;
+}
+
+#player1 { left: 10%; }
+#player2 { right: 10%; }
+
+/* --- Animaciones de entrada --- */
+
+.enter-from-left {
+    animation: enterLeft 1s forwards;
+}
+
+@keyframes enterLeft {
+    from { transform: translateX(-200%); }
+    to { transform: translateX(0%); }
+}
+
+.enter-from-right {
+    animation: enterRight 1s forwards;
+}
+
+@keyframes enterRight {
+    from { transform: translateX(200%); }
+    to { transform: translateX(0%); }
+}
+
+/* --- Combate y resultado --- */
+
+#combat-log {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-height: 100px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #d12e2e;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+#start-fight-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #d12e2e;
+    color: #fff;
+    border: 2px solid #ff0000;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#start-fight-btn:hover {
+    background: #ff0000;
+}
+
+#fight-result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px solid #ff0000;
+    padding: 20px;
+    text-align: center;
+}
+
+/* --- Utilidad --- */
+.hidden { display: none; }
